@@ -1,0 +1,32 @@
+sam@sam-MacBookPro:~/Documenten/Samwise/cmock_test$ make
+
+-------Generating mock with default settings-------
+
+ruby /home/sam/Documenten/Samwise/CMock/lib/cmock.rb --plugins="expect;ignore" dothing.h
+Creating mock for dothing...
+ruby /home/sam/Documenten/Samwise/Unity/auto/generate_test_runner.rb Testdemo.c
+gcc -I./mocks -I/home/sam/Documenten/Samwise/Unity/src -I/home/sam/Documenten/Samwise/CMock/src -I./ -o default demo.c Testdemo.c ./mocks/Mockdothing.c /home/sam/Documenten/Samwise/Unity/src/unity.c /home/sam/Documenten/Samwise/CMock/src/cmock.c Testdemo_Runner.c
+
+-------Generating mock with --ignore=args_only-------
+
+ruby /home/sam/Documenten/Samwise/CMock/lib/cmock.rb --ignore=args_only --plugins="expect;ignore" dothing.h
+Creating mock for dothing...
+ruby /home/sam/Documenten/Samwise/Unity/auto/generate_test_runner.rb Testdemo.c
+gcc -I./mocks -I/home/sam/Documenten/Samwise/Unity/src -I/home/sam/Documenten/Samwise/CMock/src -I./ -o args_only demo.c Testdemo.c ./mocks/Mockdothing.c /home/sam/Documenten/Samwise/Unity/src/unity.c /home/sam/Documenten/Samwise/CMock/src/cmock.c Testdemo_Runner.c
+
+
+sam@sam-MacBookPro:~/Documenten/Samwise/cmock_test$ ./default 
+Testdemo.c:13:test_demo_NeedToImplement:PASS
+-----------------------
+1 Tests 0 Failures 0 Ignored
+OK
+
+
+sam@sam-MacBookPro:~/Documenten/Samwise/cmock_test$ ./args_only 
+Testdemo.c:13:test_demo_NeedToImplement:FAIL: Function 'DoThing' called more times than expected.
+-----------------------
+1 Tests 1 Failures 0 Ignored
+FAIL
+sam@sam-MacBookPro:~/Documenten/Samwise/cmock_test$ 
+
+
